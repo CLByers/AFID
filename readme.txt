@@ -11,7 +11,7 @@ To install:
 3) Build the full openface distribution according to their instructions at https://github.com/cmusatyalab/openface (This hasn't been tested with the Docker install, but there's no reason it shouldn't work.)
 4) Pull down the zip for this project and extract it somewhere convenient.
 5) Run the mysqldump files to create the database. (This will take some manual executing--mysqldump is shy about views, for some reason.)
-6) Configure a user/password for the AFID database, and update that information in getFaceImages.py and facialRecFunctions.py.
+6) Configure a MySQL user/password for the AFID database, and update that information in getFaceImages.py and facialRecFunctions.py.
 
 Use:
 1) Add source images to tblSourceImage, then run getFaceImages.py to process and compare faces.
