@@ -32,7 +32,7 @@ net = openface.TorchNeuralNet("/home/charlie/openface/models/openface/nn4.small2
 
 print('Connecting to AFID database...')
 #make a connector for SQL
-cx = mysql.connector.connect(user='root',password='Mtm9WAVkbM5w',host='127.0.0.1',database='AFID')
+cx = mysql.connector.connect(user='AFIDUser',password='yourPasswordHere',host='127.0.0.1',database='AFID')
 cursor = cx.cursor()
 
 
