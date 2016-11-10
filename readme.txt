@@ -1,3 +1,5 @@
+AFID: the Archival Facial Identification Database
+
 This is a project to apply facial recognition, via OpenFace, to archival photo collections. In this version, you can process images on any machine, update the web content, and deploy it to any site--there's no live connection between the web content and the database.
 
 There is a working installation at charliebyers.org/AFID/index.html
