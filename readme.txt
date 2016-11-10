@@ -6,10 +6,12 @@ I've only seen openface build successfully under Linux (Torch seems to be the sq
 
 
 To install:
-1) Build the full openface distribution according to their instructions. (This hasn't been tested with the Docker install, but there's no reason it shouldn't work.)
-2) Pull down the zip and install it somewhere convenient.
-3) Run the mysqldump files to create the database (pre-populated with content corresponding to the included images.)
-4) Configure a user/password for the AFID database, and update that information in getFaceImages.py and facialRecFunctions.py.
+1) Install Python 2.7
+2) Install MySQL and the MySQL Connector python library. (Both get-able through apt.)
+3) Build the full openface distribution according to their instructions at https://github.com/cmusatyalab/openface (This hasn't been tested with the Docker install, but there's no reason it shouldn't work.)
+4) Pull down the zip for this project and extract it somewhere convenient.
+5) Run the mysqldump files to create the database. (This will take some manual executing--mysqldump is shy about views, for some reason.)
+6) Configure a user/password for the AFID database, and update that information in getFaceImages.py and facialRecFunctions.py.
 
 Use:
 1) Add source images to tblSourceImage, then run getFaceImages.py to process and compare faces.
