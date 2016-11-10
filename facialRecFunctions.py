@@ -13,7 +13,7 @@ def populateComparisons():
   ##with distances between each pair
   ##of images in tblFaceImage
   ##======================================
-  cx = mysql.connector.connect(user='root',password='Mtm9WAVkbM5w',host='127.0.0.1',database='AFID')
+  cx = mysql.connector.connect(user='AFIDUser',password='yourPasswordHere',host='127.0.0.1',database='AFID')
   cursor = cx.cursor()
 
   #Empty and re-populate tblComparison
