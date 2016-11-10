@@ -6,6 +6,12 @@ import mysql.connector
 import igraph
 
 
+  ##======================================
+  ##This module holds functions that you
+  ##might want to call independently of
+  ##the main batch processing in
+  ##getFaceImages.py
+  ##======================================
 
 def populateComparisons():
   ##======================================
