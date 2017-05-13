@@ -11,7 +11,7 @@ var faceMatches = [];
 var matchThreshold = 0.4;
 
 function init() {
-	document.getElementById('stats').innerText = statData[1] + ' faces identified from '+statData[0]+' photos. Last updated '+statData[3]+'.';
+	//document.getElementById('stats').innerText = statData[1] + ' faces identified from '+statData[0]+' photos. Last updated '+statData[3]+'.';
 	faceImage = document.getElementById('faceImage');
 	contextImage = document.getElementById('contextImage');
 	contextMap = document.getElementById('contextMap');
@@ -36,24 +36,7 @@ function init() {
 
 	//Find all of the source image PKs referenced in faceData
 	//And flag images that do have likely matches in matchData
-	for (i = 0;i<faceData.length;i++) {
-		if(sourceData.indexOf(faceData[i][4]) == -1) {
-			sourceData.push(faceData[i][4]);
-		}
-		
-	}
-
-	//Populate the photoBrowser element with all of the context images, image-mapped with their identified faces.
-	for(i = 0; i < sourceData.length; i++) {	
-		photoBrowser.innerHTML += imageDivForSourceImage(sourceData[i]);
-	}
-	//And make matchData symmetrical. (In its original state, it's just distinct pairs.)
-	lenMatches = matchData.length;	
-	for (i=0;i<lenMatches;i++){
-		matchData.push([matchData[i][2],matchData[i][3],matchData[i][0],matchData[i][1],matchData[i][4]])
-	}
-
-	browsePhotos();
+	
 }
 
 function browsePhotos() {
@@ -90,7 +73,6 @@ function loadFaceContent(facePK) {
 	var sourceFK = faceData[indexForPK(facePK)][4];
 	var mapString = "";
 	//Source the images	
-	faceImage.src=faceData[indexForPK(facePK)][1];
 	//contextImage.src=faceData[indexForPK(facePK)][2];
 	
 	//Update the image map on contextImage
