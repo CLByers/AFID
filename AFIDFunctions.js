@@ -1,6 +1,7 @@
 
 var faceImage, contextImage, matchFrame, matchTable, faceBrowserDiv, subjectInfoBox, contextMap;
 var photoBrowser, faceBrowser, matchBrowser, aboutBrowser;
+var menuPhoto, menuFace, menuMatch, menuAbout;
 var photoDivs = [];
 var sourceData = [];
 
@@ -24,7 +25,12 @@ function init() {
 	photoBrowser=document.getElementById('photoBrowser');
 	matchBrowser=document.getElementById('matchBrowser');
 	aboutBrowser=document.getElementById('aboutBrowser');
-
+	
+	menuPhoto=document.getElementById('menuPhoto');
+	menuFace=document.getElementById('menuFace');
+	menuMatch=document.getElementById('menuMatch');
+	menuAbout=document.getElementById('menuAbout');
+	
 	//randIndex = faceData[Math.floor(Math.random()*faceData.length)][0];
 	//loadFaceContent(randIndex);
 	//loadFaceContent(759);	
@@ -39,11 +45,21 @@ function init() {
 	
 }
 
+function resetMenuHighlight() {
+	menuPhoto.className="header";
+	menuFace.className="header";
+	menuMatch.className="header";
+	menuAbout.className="header";
+}
+
 function browsePhotos() {
 	photoBrowser.style.display="block";
 	matchBrowser.style.display="none";
 	faceBrowser.style.display="none";
 	aboutBrowser.style.display="none";	
+	
+	resetMenuHighlight();
+	menuPhoto.className="headerHighlight";
 }
 
 function browseID() {
@@ -51,6 +67,9 @@ function browseID() {
 	matchBrowser.style.display="block";
 	faceBrowser.style.display="none";	
 	aboutBrowser.style.display="none";	
+	
+	resetMenuHighlight();
+	menuMatch.className="headerHighlight";
 }
 
 function browseFaces() {
@@ -58,6 +77,9 @@ function browseFaces() {
 	matchBrowser.style.display="none";
 	faceBrowser.style.display="block";	
 	aboutBrowser.style.display="none";	
+	
+	resetMenuHighlight();
+	menuFace.className="headerHighlight";
 }
 
 function browseAbout() {
@@ -65,6 +87,9 @@ function browseAbout() {
 	matchBrowser.style.display="none";
 	faceBrowser.style.display="none";	
 	aboutBrowser.style.display="block";	
+	
+	resetMenuHighlight();
+	menuAbout.className="headerHighlight";
 }
 
 function loadFaceContent(facePK) {

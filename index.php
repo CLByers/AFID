@@ -23,7 +23,26 @@
 	}
 	$linkAction = $_GET["linkAct"];
 	
+	if ($linkAction == "") {
+		echo "
+			<div style='position:absolute; left:50px; top:50px; background-color:white; border:solid black 2px; padding:20px; border-radius:5px; width:828px;'>
+				<h3>Welcome</h3>
+				<p>
+					The Archival Facial Identification Database is a new way to browse photo collections. By linking similar faces, it highlights social connections that would be difficult or impossible to draw out manually. With the right metadata, it can even help put names to unidentified subjects.
+				</p>
+				<p>
+					Click a face to get started.
+				</p>
+				<a href=\"index.php?matchImage=2041&amp;sourcesPage=1&amp;facesPage=1&amp;linkAct=matchImage\"><img id=\"faceImage\" style=\"height: 192px; width:192px; vertical-align:text-top; margin:5px;\" src=\"faceImages/wedding1_8.jpg\" height=\"192\" width=\"192\"></a>
+				<a href=\"index.php?matchImage=2293&amp;sourcesPage=1&amp;facesPage=1&amp;linkAct=matchImage\"><img id=\"faceImage\" style=\"height: 192px; width:192px; vertical-align:text-top; margin:5px;\" src=\"faceImages/7E8798F20DAEC465A4694DD7D6276B67_4.jpg\" height=\"192\" width=\"192\"></a>
+				<a href=\"index.php?matchImage=2319&amp;sourcesPage=1&amp;facesPage=1&amp;linkAct=matchImage\"><img id=\"faceImage\" style=\"height: 192px; width:192px; vertical-align:text-top; margin:5px;\" src=\"faceImages/257DAD5811FD383FCA505A7BC1D72C36_17.jpg\" height=\"192\" width=\"192\"></a>
+				<a href=\"index.php?matchImage=2484&amp;sourcesPage=1&amp;facesPage=1&amp;linkAct=matchImage\"><img id=\"faceImage\" style=\"height: 192px; width:192px; vertical-align:text-top; margin:5px;\" src=\"faceImages/07B7E826FF2425A5E10494A2255D2270_2.jpg\" height=\"192\" width=\"192\"></a>
+			</div>
+		";
+	}
+	
 	$sectionVisibility = array("none","none","block");
+	$menuHighlights = array("header","header","headerHighlights","header");
 	if($linkAction == "sourcesPage") {
 		$sectionVisibility = array("none","block","none");
 	} else if ($linkAction == "facesPage") {
@@ -184,7 +203,7 @@
 				#echo "<img src='".$row['imageURL']."' height='192' class='photoBrowserImg'></img>";
 		}
 		
-		return("<div style='display:inline; float:left; position:relative; margin:5px; padding:0px;'>".$imageString.$divBoxString."<p>".$row['sourceTitle']." <a href=\"sourceImages/".$row['sourceImageURL']."\" target=\"_New\">[Full size]</a> <a href=\"#\">[Source]</a></p></div>");
+		return("<div style='display:inline; float:left; position:relative; margin:5px; padding:0px;'>".$imageString.$divBoxString."<p>".$row['sourceTitle']." <a href=\"sourceImages/".$row['sourceImageURL']."\" target=\"_New\">[Full size]</a> <a href=\"".$row['metaURL']."\" target=\"_New\">[Source]</a></p></div>");
 
 	}
 
@@ -242,7 +261,7 @@
 
 		
 	</head>	
-	<body onLoad="init();">
+	<body onLoad="init();browseFaces();">
 	
 <?php
 		echo "<script type=\"text/javascript\">".$initScript."</script>";
@@ -251,7 +270,7 @@
 			<span class="stats" id="stats"><?php echo $statsString; ?></span>			
 			<!--<h2>A.F.I.D. Gallery</h2>-->
 			<h4>Archival Facial Identification Database</h4>
-<h4><a class="header" href="#" onClick="browseFaces()">Browse by face</a> | <a class="header" href="#" onClick="browsePhotos()">Browse by photo</a> | <a class="header" href="#" onClick="browseID()">Browse by matches</a> | <a class="header" style="background:white;color:black;" href="#" onClick="browseAbout()">About AFID</a></h4>
+<h4><a id="menuFace" class="header" href="#" onClick="browseFaces()">Browse by face</a> | <a id="menuPhoto" class="header" href="#" onClick="browsePhotos()">Browse by photo</a> | <a id="menuMatch" class="headerHighlight" href="#" onClick="browseID()">Browse by matches</a> | <a id="menuAbout" class="header" href="#" onClick="browseAbout()">About AFID</a></h4>
 		</div>
 		
 		
@@ -296,12 +315,12 @@
 		echo "<div style='display:block; clear:both;'>".$sourcePagerString."</div>";
 	?>
 </div>
-		<div class="threeup" id="aboutBrowser" style="display:none; background-image:url('network2.png');"><p>AFID is a project to bring face recognition to archival photo collections. The technology has grown by leaps and bounds to meet the parameters of social media and a few other applications, but I believe it can also reveal important historical data, too. There are deep layers of associative meaning in photo collections, I believe we can make those associations visible to researchers.
+		<div class="threeup" id="aboutBrowser" style="display:none; background-image:url('network2.png'); padding:15px; width:80%; background-position: -300px -80px;"><p>AFID is a project to bring face recognition to archival photo collections. The technology has grown by leaps and bounds to meet the parameters of social media and a few other applications, but I believe it can also reveal important historical data, too. There are deep layers of associative meaning in photo collections, which could be invaluable to researchers.
 <!--<img src="network.png">-->
-<p>The project is built on the <a href="https://cmusatyalab.github.io/openface/" target="_New">Openface</a> project, which uses OpenCV2, Torch, and DLib (among other great open-source software) to detect and classify faces through deep neural networks.
+<p>The software is built on the <a href="https://cmusatyalab.github.io/openface/" target="_New">Openface</a> project, which uses OpenCV2, Torch, and DLib (among other great open-source software) to detect and classify faces through deep neural networks.
 <p>Check out the GIT repository at <a href="https://github.com/CLByers/AFID" target="_New">https://github.com/CLByers/AFID</a>
-<p>Thanks to the <a href="http://digitalarchives.wa.gov/" target="_New">Washington State Digital Archives</a> and the A.M. Kendrick photo collection for photos.
-<p>I'm Charlie Byers, an M.A. student in Eastern Washington University's history program. Email me at CLByers at gmail dot com with questions, concerns, panels at SAA 2017, etc.
+<p>Thanks to the <a href="http://digitalarchives.wa.gov/" target="_New">Washington State Archives Digital Archives</a> for the photos in this dataset.
+<p>I'm Charlie Byers, an M.A. student in Eastern Washington University's public history program. Email me at CLByers at gmail dot com.
 </div>
 		
 		
